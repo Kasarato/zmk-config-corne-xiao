@@ -4,7 +4,6 @@
 
 / {
     macros {
-        // マクロ定義: カンマを削除しました
         m0: m0 {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -28,7 +27,6 @@
     };
 
     behaviors {
-        // Tap Dance定義: bindings内のカンマを削除しました
         td0: td0 {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
@@ -45,19 +43,19 @@
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&kp L &kp NONUS_HASH>;
+            bindings = <&kp L &kp NUHS>;
         };
         td_comma: td_comma {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&kp COMMA &kp QUESTION>;
+            bindings = <&kp COMMA &kp QMARK>;
         };
         td_dot: td_dot {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&kp DOT &kp EXCLAMATION>;
+            bindings = <&kp DOT &kp EXCL>;
         };
         td_tab: td_tab {
             compatible = "zmk,behavior-tap-dance";
@@ -75,7 +73,7 @@
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&kp ESCAPE &kp LALT>;
+            bindings = <&kp ESC &kp LALT>;
         };
     };
 
@@ -111,7 +109,7 @@
 
         layer_3 {
             bindings = <
-    &none      &kp CARET  &kp DQT    &kp YEN    &none          &none      &none      &none      &none      &none
+    &none      &kp CARET  &kp DQT    &kp INT3   &none          &none      &none      &none      &none      &none
     &none      &kp DLLR   &kp PRCNT  &kp EQUAL  &none          &none      &none      &none      &none      &none
     &none      &kp EXCL   &kp LBKT   &kp HASH   &none          &none      &none      &none      &none      &none
                           &trans     &trans     &trans         &trans     &trans     &trans
