@@ -4,7 +4,7 @@
 
 / {
     macros {
-        // マクロ定義: M0 (), M1 [], M2 {}, M3 <>
+        // マクロ定義: カンマを削除しました
         m0: m0 {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -28,54 +28,54 @@
     };
 
     behaviors {
-        // Tap Dance定義: タップで左、ホールド/ダブルタップで右
+        // Tap Dance定義: bindings内のカンマを削除しました
         td0: td0 {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&kp MINUS>, <&kp GRAVE>;
+            bindings = <&kp MINUS &kp GRAVE>;
         };
         td_q: td_q {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&kp Q>, <&kp RBKT>;
+            bindings = <&kp Q &kp RBKT>;
         };
         td_l: td_l {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&kp L>, <&kp NONUS_HASH>;
+            bindings = <&kp L &kp NONUS_HASH>;
         };
         td_comma: td_comma {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&kp COMMA>, <&kp QMARK>;
+            bindings = <&kp COMMA &kp QUESTION>;
         };
         td_dot: td_dot {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&kp DOT>, <&kp EXCL>;
+            bindings = <&kp DOT &kp EXCLAMATION>;
         };
         td_tab: td_tab {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&kp TAB>, <&kp LCTRL>;
+            bindings = <&kp TAB &kp LCTRL>;
         };
         td_ent: td_ent {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&kp ENTER>, <&kp RSHFT>;
+            bindings = <&kp ENTER &kp RSHFT>;
         };
         td_esc: td_esc {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&kp ESCAPE>, <&kp LALT>;
+            bindings = <&kp ESCAPE &kp LALT>;
         };
     };
 
