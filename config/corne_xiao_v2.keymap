@@ -4,76 +4,22 @@
 
 / {
     macros {
-        m0: m0 {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LPAR &kp RPAR>;
-        };
-        m1: m1 {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LBKT &kp RBKT>;
-        };
-        m2: m2 {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LBRC &kp RBRC>;
-        };
-        m3: m3 {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LT &kp GT>;
-        };
+        m0: m0 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp LPAR &kp RPAR>; };
+        m1: m1 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp LBKT &kp RBKT>; };
+        m2: m2 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp LBRC &kp RBRC>; };
+        m3: m3 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp LT &kp GT>; };
     };
 
     behaviors {
-        td0: td0 {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&kp MINUS &kp GRAVE>;
-        };
-        td_q: td_q {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&kp Q &kp RBKT>;
-        };
-        td_l: td_l {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&kp L &kp NUHS>;
-        };
-        td_comma: td_comma {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&kp COMMA &kp QMARK>;
-        };
-        td_dot: td_dot {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&kp DOT &kp EXCL>;
-        };
-        td_tab: td_tab {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&kp TAB &kp LCTRL>;
-        };
-        td_ent: td_ent {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&kp ENTER &kp RSHFT>;
-        };
-        td_esc: td_esc {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&kp ESC &kp LALT>;
+        // 共通のホールドタップ設定
+        // &ht <長押しキー> <短押しキー> の順で使います
+        ht: hold_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;    // 200ms以上で長押し判定
+            quick-tap-ms = <175>;       // 素早く2回叩くと連打が可能
+            flavor = "balanced";
+            bindings = <&kp>, <&kp>;
         };
     };
 
@@ -82,37 +28,41 @@
 
         default_layer {
             bindings = <
-    &td_q      &td_l      &kp U      &td_comma  &td_dot        &kp F      &kp W      &kp R      &kp Y      &kp P
-    &kp E      &kp I      &kp A      &kp O      &td0           &kp K      &lt 3 T    &lt 1 N    &lt 2 S    &kp H
-    &kp Z      &lt 1 X    &lt 3 C    &lt 2 V    &td_tab        &kp G      &kp D      &kp M      &kp J      &kp B
-                          &td_esc    &kp SPACE  &kp BSPC       &td_ent    &kp RCTRL  &kp RGUI
+    // 1段目
+    &ht RBKT Q     &ht NUHS L     &kp U          &ht QMARK COMMA &ht EXCL DOT    &kp F      &kp W      &kp R      &kp Y      &kp P
+    // 2段目
+    &kp E          &kp I          &kp A          &kp O           &ht GRAVE MINUS &kp K      &lt 3 T    &lt 1 N    &lt 2 S    &kp H
+    // 3段目
+    &kp Z          &lt 1 X        &lt 3 C        &lt 2 V         &ht LCTRL TAB   &kp G      &kp D      &kp M      &kp J      &kp B
+    // 親指
+                                  &ht LALT ESC   &kp SPACE       &kp BSPC        &ht RSHFT ENTER &kp RCTRL  &kp RGUI
             >;
         };
 
         layer_1 {
             bindings = <
-    &kp KP_MULTIPLY &kp N7     &kp N8     &kp N9     &kp KP_PLUS    &none      &none      &none      &none      &none
-    &kp KP_SLASH    &kp N4     &kp N5     &kp N6     &kp KP_MINUS   &none      &none      &none      &none      &none
-    &kp N0          &kp N1     &kp N2     &kp N3     &kp UNDER      &none      &none      &none      &none      &none
-                               &trans     &trans     &trans         &trans     &trans     &trans
+    &kp KP_MULTIPLY &kp N7        &kp N8         &kp N9          &kp KP_PLUS     &none      &none      &none      &none      &none
+    &kp KP_SLASH    &kp N4        &kp N5         &kp N6          &kp KP_MINUS    &none      &none      &none      &none      &none
+    &kp N0          &kp N1        &kp N2         &kp N3          &kp UNDER       &none      &none      &none      &none      &none
+                                  &trans         &trans          &trans          &trans     &trans     &trans
             >;
         };
 
         layer_2 {
             bindings = <
-    &none      &none      &none      &none      &kp PIPE       &none      &none      &kp UP     &none      &none
-    &kp SLASH  &m1        &m0        &m2        &kp SEMI       &none      &kp LEFT   &kp DOWN   &kp RIGHT  &none
-    &kp BSLH   &m3        &kp AMPS   &kp AT     &kp SQT        &none      &none      &none      &none      &none
-                          &trans     &trans     &trans         &trans     &trans     &trans
+    &none           &none         &none          &none           &kp PIPE        &none      &none      &kp UP     &none      &none
+    &kp SLASH       &m1           &m0            &m2             &kp SEMI        &none      &kp LEFT   &kp DOWN   &kp RIGHT  &none
+    &kp BSLH        &m3           &kp AMPS       &kp AT          &kp SQT         &none      &none      &none      &none      &none
+                                  &trans         &trans          &trans          &trans     &trans     &trans
             >;
         };
 
         layer_3 {
             bindings = <
-    &none      &kp CARET  &kp DQT    &kp INT3   &none          &none      &none      &none      &none      &none
-    &none      &kp DLLR   &kp PRCNT  &kp EQUAL  &none          &none      &none      &none      &none      &none
-    &none      &kp EXCL   &kp LBKT   &kp HASH   &none          &none      &none      &none      &none      &none
-                          &trans     &trans     &trans         &trans     &trans     &trans
+    &none           &kp CARET     &kp DQT        &kp INTERNATIONAL_3 &none       &none      &none      &none      &none      &none
+    &none           &kp DLLR      &kp PRCNT      &kp EQUAL           &none       &none      &none      &none      &none      &none
+    &none           &kp EXCL      &kp LBKT       &kp HASH            &none       &none      &none      &none      &none      &none
+                                  &trans         &trans              &trans      &trans     &trans     &trans
             >;
         };
     };
